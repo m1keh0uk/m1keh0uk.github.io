@@ -1,11 +1,21 @@
 ---
-title: "m1keh0uk.github.io"
+title: "M1ke H0uk"
+image: media/_TS73627.jpg
+toc: false
+about: 
+  template: jolla
+  image-shape: round
+  image-width: 17em
+  links:
+    - text: LinkedIn
+      href: www.linkedin.com/in/michael-houk-94704b274
+    - text: GitHub
+      href: https://github.com/m1keh0uk
+    - text: Email
+      href: mailto:mhouk26@students.claremontmckenna.edu
 ---
+  <!-- Website for help:https://ucsb-meds.github.io/creating-quarto-websites/ -->
 
-This is a Quarto website.
+This is the website of Michael Houk. Here is a list of some of my key dentities and qualities, though it is by no means exhaustive: Brother, Curious, Student, Friend, Athlete, Awake, Myself?, Thinker, Attached.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+I study economics and engineering. I play football. I like hard work. 
