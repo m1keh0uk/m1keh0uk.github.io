@@ -1,0 +1,22 @@
+---
+title: "World's Fairs"
+---
+
+
+```{r,warning=FALSE, message=FALSE, error=FALSE}
+  library(tidyverse)
+  tuesdata <- tidytuesdayR::tt_load('2024-08-13')
+  worlds_fairs <- tuesdata$worlds_fairs
+  ggplot(data = worlds_fairs, 
+         aes(x = start_year, y = visitors, color = attending_countries)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "World's Fairs: Year vs Visitors",
+       x = "Year",
+       y = "Number of Visitors",
+       color = "Attending Countries") +
+  theme_minimal()
+
+```
+World's Fairs visitor numbers are up since 1850! Also, the color gradient show the increase in the number of countries who attend the World's Fair.
+------------------------------------------------------------------------

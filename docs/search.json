@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "outerSpaceObjects.html",
+    "href": "outerSpaceObjects.html",
+    "title": "Outer Space Objects",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "library(tidyverse)\n  tuesdata &lt;- tidytuesdayR::tt_load('2024-04-23')\n  outer_space_objects &lt;- tuesdata$outer_space_objects\n  \n  object_summary &lt;- outer_space_objects %&gt;%\n  group_by(Year) %&gt;%\n  summarize(total_objects = sum(num_objects, na.rm = TRUE))\n  \n  ggplot(data = object_summary, \n         aes(x = Year, y = total_objects)) +\n  geom_bar(stat = \"identity\", fill = \"purple\") +\n  labs(\n    title = \"Number of Objects Launched into Outer Space by Year\",\n    x = \"Year\",\n    y = \"Number of Objects\"\n    ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThe number of objects launched into space has sky rocketed! The sharp increase in the 2010’s is out of this world."
   },
   {
     "objectID": "index.html",
@@ -12,5 +12,26 @@
     "title": "M1ke H0uk",
     "section": "",
     "text": "This is the website of Michael Houk. Here is a list of some of my key dentities and qualities, though it is by no means exhaustive: Brother, Curious, Student, Friend, Athlete, Awake, Myself?, Thinker, Attached.\nI study economics and engineering. I play football. I like hard work."
+  },
+  {
+    "objectID": "worldsfairs.html",
+    "href": "worldsfairs.html",
+    "title": "World’s Fairs",
+    "section": "",
+    "text": "library(tidyverse)\n  tuesdata &lt;- tidytuesdayR::tt_load('2024-08-13')\n  worlds_fairs &lt;- tuesdata$worlds_fairs\n  ggplot(data = worlds_fairs, \n         aes(x = start_year, y = visitors, color = attending_countries)) +\n  geom_point() +\n  geom_smooth(se = FALSE) +\n  labs(title = \"World's Fairs: Year vs Visitors\",\n       x = \"Year\",\n       y = \"Number of Visitors\",\n       color = \"Attending Countries\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "worldsfairs.html#worlds-fairs-visitor-numbers-are-up-since-1850-also-the-color-gradient-show-the-increase-in-the-number-of-countries-who-attend-the-worlds-fair.",
+    "href": "worldsfairs.html#worlds-fairs-visitor-numbers-are-up-since-1850-also-the-color-gradient-show-the-increase-in-the-number-of-countries-who-attend-the-worlds-fair.",
+    "title": "World’s Fairs",
+    "section": "World’s Fairs visitor numbers are up since 1850! Also, the color gradient show the increase in the number of countries who attend the World’s Fair.",
+    "text": "World’s Fairs visitor numbers are up since 1850! Also, the color gradient show the increase in the number of countries who attend the World’s Fair."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is my collection of data visualizations. Click through my projects if you want your mind blown."
   }
 ]

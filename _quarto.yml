@@ -7,7 +7,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+      - text: Data Viz
+        menu:              
+          - href: worldsfairs.qmd
+            text: World's Fair
+          - href: outerSpaceObjects.qmd
+            text: Outer Space Objects
 
 format:
   html:

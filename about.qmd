@@ -2,8 +2,5 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+This is my collection of data visualizations. Click through my projects if you want your mind blown. \
+\

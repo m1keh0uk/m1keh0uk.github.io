@@ -1,0 +1,29 @@
+---
+title: "Outer Space Objects"
+---
+
+```{r,warning=FALSE, message=FALSE, error=FALSE}
+  library(tidyverse)
+  tuesdata <- tidytuesdayR::tt_load('2024-04-23')
+  outer_space_objects <- tuesdata$outer_space_objects
+  
+  object_summary <- outer_space_objects %>%
+  group_by(Year) %>%
+  summarize(total_objects = sum(num_objects, na.rm = TRUE))
+  
+  ggplot(data = object_summary, 
+         aes(x = Year, y = total_objects)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  labs(
+    title = "Number of Objects Launched into Outer Space by Year",
+    x = "Year",
+    y = "Number of Objects"
+    ) +
+  theme_minimal()
+
+```
+
+The number of objects launched into space has sky rocketed! The sharp increase in the 2010's is out of this world. 
+
+
+
