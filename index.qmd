@@ -10,7 +10,7 @@ about:
     - text: LinkedIn
       href: www.linkedin.com/in/michael-houk-94704b274
     - text: GitHub
-      href: https://github.com/m1keh0uk
+      href: https://github.com/m1keh0uk/m1keh0uk.github.io
     - text: Email
       href: mailto:mhouk26@students.claremontmckenna.edu
 ---
