@@ -28,6 +28,13 @@
     "text": "World’s Fairs visitor numbers are up since 1850! Also, the color gradient show the increase in the number of countries who attend the World’s Fair."
   },
   {
+    "objectID": "obamaTweets.html",
+    "href": "obamaTweets.html",
+    "title": "The Tweets of Former President Obama",
+    "section": "",
+    "text": "This is a great way to see what Obama’s presidency was about. His most his most notable policy reforms are on this list. Over 600 tweets about #ActOnClimate—he really cared!\n\n\n\n\n\n\n\n\n\nObama’s tweets have a beautiful distribution of word length. The Central Limit Theorem in action! I will say it is negatively skewed—but good enough for me. 18-19 words seems to be the sweet spot for Mr. Obama. Short and sweet.\n\n\n\n\n\n\n\n\n\nObama tweets the most around mid-day, then picks it back up for a big spike at around 8pm. That must be when he gets the creative juices flowing! Would be interesting to research what makes 8pm such a popular tweeting time for him.\nData Source: https://www.obamalibrary.gov/digital-research-room/archived-white-house-websites-and-social-media"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
