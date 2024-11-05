@@ -1,0 +1,144 @@
+---
+title: "Drunk Passenger"
+---
+
+There are n passengers getting on a fully booked plane. The first guy to board the plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is avaible, they will sit there, if it has been taken, they do as the first guy and choose randomly. Whats the probability that the last guy to board sits in his assigned seat?
+
+```{r, include=FALSE}
+library(tidyverse)
+library(purrr)
+
+```
+
+Let's simulate for planes ranging from 2 to 100 passengers.
+
+```{r}
+drunkPassenger <- function(n, seats){
+   if (n == 1) {
+    seats <-seats[seats != sample(seats, 1, replace = FALSE)]
+  }
+  
+  if (length(seats) == 1){
+    return(seats[1] == n)
+  }
+  
+ 
+  choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+  remaining_seats <- seats[seats != choice]
+  
+  drunkPassenger(n + 1, remaining_seats)
+}
+
+
+seats <- 2:100
+runs <- 1000
+
+drunk_passengers_100 <- map(seats, function(x) {
+  data.frame(
+    num_passengers = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger(1, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_seats = num_passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+
+drunk_passengers_100 |>
+  ggplot(aes(x = num_passengers, y = pct_correct_last_seat)) +
+    geom_line() +
+    ylim(0,1)+
+    labs(
+      title = "Odds Last Person Gets Their Seat",
+      x = "Number of Passengers",
+      y = ""
+    )
+
+```
+
+So we see on a fully booked flight, there's a 50% chance the last guy gets his seat, no matter how many passengers!
+
+[Part 2: Extra Seats]{style="font-size:1.25em; color:gray;"}
+
+Now lets consider that the plane isn't fully booked, that there's n passengers but k seats, given that k \>= n.
+
+Lets take n to be 20, and simulate k from 20:30
+
+```{r}
+drunkPassenger_k <- function(n, passengers, seats){
+    if (length(passengers) == n){
+    return(n %in% seats)
+  }
+  
+  if (n == 1) {
+    first_choice = sample(seats, 1, replace = FALSE)
+    if (first_choice == length(passengers)) {
+      return(FALSE)
+    }
+    remaining_seats <-seats[seats != first_choice]
+  } else{
+      choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+      if (choice == length(passengers)) {
+        return(FALSE)
+      }
+      remaining_seats <-seats[seats != choice]
+  }
+  
+
+  drunkPassenger_k(n + 1, passengers, remaining_seats)
+}
+
+runs = 1000
+passengers = 20
+seats = 20:30
+
+
+drunk_passengers_k20 <- map(seats, function(x) {
+  data.frame(
+    num_seats = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger_k(1, 1:passengers, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_passengers = passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+```
+
+Now lets take n to be 5, and simulate k from 5:15.
+
+```{r}
+runs = 1000
+passengers = 5
+seats = 5:15
+
+
+drunk_passengers_k5 <- map(seats, function(x) {
+  data.frame(
+    num_seats = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger_k(1, 1:passengers, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_passengers = passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+```
+
+```{r}
+
+drunk_k <- bind_rows(drunk_passengers_k5, drunk_passengers_k20)
+  
+drunk_k |>
+  group_by(num_passengers) |>
+  mutate(diff = num_seats - num_passengers) |>
+  ggplot(aes(x = diff, y = pct_correct_last_seat, color = factor(num_passengers), group = num_passengers)) +
+    geom_line() +
+    labs(
+      color = "Number of Passengers",
+      x = "Extra Seats",
+      title = "Odds Last Person Gets Their Seat",
+      y = "")
+```
+
+If n is fixed, increasing k makes the probability of last guy finding his seat approaches 1. Pretty intuitive. It's cool to see that the number of passengers and seats doesn't affect the odds, its the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there's 3 extra seats in both examples. This shows a unique solution that isn't very intuitive.

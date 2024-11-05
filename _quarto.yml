@@ -17,6 +17,8 @@ website:
             text: Outer Space Objects
           - href: obamaTweets.qmd
             text: Obama's Tweets
+          - href: planeSimulation.qmd
+            text: Drunk Passenger Simualtion
 
 format:
   html:
