@@ -19,6 +19,8 @@ website:
             text: Obama's Tweets
           - href: planeSimulation.qmd
             text: Drunk Passenger Simualtion
+          - href: WAI.qmd
+            text: WAI measures
 
 format:
   html:
