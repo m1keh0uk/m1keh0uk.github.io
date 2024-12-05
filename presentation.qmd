@@ -1,0 +1,28 @@
+---
+title: "title of presentation"
+author: "your name"
+subtitle: "date of presentation"
+format:
+  revealjs:
+    scrollable: true
+    slide-number: true
+    show-slide-number: all
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+Yo
+
+##
+
+was good
+<iframe src="https://www.wikipedia.org" width="100%" height="600" style="border: none;"></iframe>
+
+
+
+
+
+

@@ -14,18 +14,21 @@ Let's simulate for planes ranging from 2 to 100 passengers.
 
 ```{r}
 drunkPassenger <- function(n, seats){
-   if (n == 1) {
+  #generate random seat for first (drunk) passenger
+  if (n == 1) {
     seats <-seats[seats != sample(seats, 1, replace = FALSE)]
   }
   
+  #check if last seat matches last person, return true/false
   if (length(seats) == 1){
     return(seats[1] == n)
   }
   
- 
+  #pick assigned seat if available, else pick random
   choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
   remaining_seats <- seats[seats != choice]
   
+  #call function again for next passenger
   drunkPassenger(n + 1, remaining_seats)
 }
 
@@ -66,17 +69,22 @@ Lets take n to be 20, and simulate k from 20:30
 
 ```{r}
 drunkPassenger_k <- function(n, passengers, seats){
-    if (length(passengers) == n){
+  #check if last guy gets his seat
+  if (length(passengers) == n){
     return(n %in% seats)
   }
   
+  #fist seat selection
   if (n == 1) {
     first_choice = sample(seats, 1, replace = FALSE)
+    #stop simulation if chooses last persons seat
     if (first_choice == length(passengers)) {
       return(FALSE)
     }
     remaining_seats <-seats[seats != first_choice]
+  
   } else{
+      #pick assigned seat if available, else pick random
       choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
       if (choice == length(passengers)) {
         return(FALSE)
@@ -84,7 +92,7 @@ drunkPassenger_k <- function(n, passengers, seats){
       remaining_seats <-seats[seats != choice]
   }
   
-
+  #call function again for next passenger
   drunkPassenger_k(n + 1, passengers, remaining_seats)
 }
 

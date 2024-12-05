@@ -23,7 +23,9 @@ title: "Outer Space Objects"
 
 ```
 
-The number of objects launched into space has sky rocketed! The sharp increase in the 2010's is out of this world. 
-
-
-
+The number of objects launched into space has sky rocketed! The sharp increase in the 2010's is out of this world.\
+\
+\
+Data came from Tidy Tuesday:\
+<https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-04-23/readme.md>\
+-space object data maintained by the United Nations Office for Outer Space Affairs, based on all launches registered to the UN.

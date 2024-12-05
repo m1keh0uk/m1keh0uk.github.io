@@ -10,13 +10,13 @@ about:
     - text: LinkedIn
       href: www.linkedin.com/in/michael-houk-94704b274
     - text: GitHub
-      href: https://github.com/m1keh0uk/m1keh0uk.github.io
+      href: https://github.com/m1keh0uk/
     - text: Email
       href: mailto:mhouk26@students.claremontmckenna.edu
 ---
 
 <!-- Website for help:https://ucsb-meds.github.io/creating-quarto-websites/ -->
 
-This is the website of Michael Houk. Here is a list of some of my key dentities and qualities, though it is by no means exhaustive: Brother, Curious, Student, Friend, Athlete, Awake, Myself?, Thinker, Attached.
+This is the website of Michael Houk. Here is a list of some of my key identities and qualities, though it is by no means exhaustive: Brother, Student, Friend, Athlete, Awake, Myself?, Thinker, Attached.
 
 I study economics and engineering. I play football. I like hard work.

@@ -2,7 +2,6 @@
 title: "World's Fairs"
 ---
 
-
 ```{r,warning=FALSE, message=FALSE, error=FALSE}
   library(tidyverse)
   tuesdata <- tidytuesdayR::tt_load('2024-08-13')
@@ -18,5 +17,9 @@ title: "World's Fairs"
   theme_minimal()
 
 ```
-World's Fairs visitor numbers are up since 1850! Also, the color gradient show the increase in the number of countries who attend the World's Fair.
-------------------------------------------------------------------------
+
+World's Fairs visitor numbers are up since 1850! Also, the color gradient shows the increase in the number of countries who attend the World's Fair.
+
+World's Fairs Data came from Tidy Tuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-08-13/readme.md>
+
+-data was collected from the wikipedia page to analyze trends related to the fair.

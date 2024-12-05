@@ -2,7 +2,7 @@
 title: "The Tweets of Former President Obama"
 ---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+```{r, warning=FALSE, message=FALSE, error=FALSE}
 library(tidyverse)
 hashtags <- read.csv("tweets.csv") |>
   mutate(text = str_extract_all(text, "#\\w+")) |>
@@ -25,11 +25,10 @@ hashtags |>
   
     
 ```
-This is a great way to see what Obama's presidency was  about. His most his most notable policy
-reforms are on this list. Over 600 tweets about #ActOnClimate—he really cared!
 
+This is a great way to see what Obama's presidency was about. His most his most notable policy reforms are on this list. Over 600 tweets about #ActOnClimate—he really cared!
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+```{r, warning=FALSE, message=FALSE, error=FALSE}
 read.csv("tweets.csv") |>
   mutate(wordCount = str_count(text, "\\S+")) |>
   ggplot(aes(x = wordCount)) +
@@ -40,10 +39,10 @@ read.csv("tweets.csv") |>
     y = ""
   )
 ```
-Obama's tweets have a beautiful distribution of word length. The Central Limit Theorem in action! I will say it is
-negatively skewed—but good enough for me. 18-19 words seems to be the sweet spot for Mr. Obama. Short and sweet.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+Obama's tweets have a beautiful distribution of word length. The Central Limit Theorem in action! I will say it is negatively skewed—but good enough for me. 18-19 words seems to be the sweet spot for Mr. Obama. Short and sweet.
+
+```{r, warning=FALSE, message=FALSE, error=FALSE}
 read.csv("tweets.csv") |>
   mutate(hour = str_extract(timestamp, "(?<=\\d{4}-\\d{2}-\\d{2} )\\d{2}")) |>
   mutate(hour = ifelse(as.numeric(hour) - 5 < 0, as.numeric(hour) + 19, as.numeric(hour) - 5)) |> 
@@ -56,15 +55,7 @@ read.csv("tweets.csv") |>
     x = "Time EST"
   )
 ```
-Obama tweets the most around mid-day, then picks it back up for a big spike at around 8pm.
-That must be when he gets the creative juices flowing! Would be interesting to research what makes 8pm such a 
-popular tweeting time for him.
 
+Obama tweets the most around mid-day, then picks it back up for a big spike at around 8pm. That must be when he gets the creative juices flowing! Would be interesting to research what makes 8pm such a popular tweeting time for him.
 
-Data Source: https://www.obamalibrary.gov/digital-research-room/archived-white-house-websites-and-social-media
-
-
-
-
-
-
+Data was collected by the Barack Obama Presidential Library to preserve his online presence: https://www.obamalibrary.gov/digital-research-room/archived-white-house-websites-and-social-media
