@@ -21,6 +21,8 @@ website:
             text: Drunk Passenger Simualtion
           - href: WAI.qmd
             text: WAI measures
+          - href: shinyWAI.qmd
+            text: Interactive WAI
           - href: presentation.qmd
             text: End of Semester Presentaion
 

@@ -32,7 +32,8 @@ absorbance3 <- DBI::dbGetQuery(con_wai,"SELECT
   info.year,
   COUNT(DISTINCT m.SubjectNumber, m.Ear) AS Unique_Ears,
   AVG(m.Absorbance) AS mean_absorbance,
-  m.frequency
+  m.frequency,
+  CONCAT(AuthorsShortList, ' (', year, ') N=', COUNT(DISTINCT m.SubjectNumber, m.Ear), '; ', Instrument) AS colorID
 FROM (
   SELECT 
     Identifier, SubjectNumber, Ear, frequency, Instrument, AVG(Absorbance) AS Absorbance
@@ -54,7 +55,6 @@ ORDER BY info.AuthorsShortList, m.frequency ASC")
 #| message: false
 absorbance3 |>
   ungroup() |>
-  mutate(colorID = paste0(AuthorsShortList, " (", year, ") N=", Unique_Ears, "; ", Instrument)) |>
   ggplot(aes(x = frequency, y = mean_absorbance, group = Identifier, color = colorID)) +
   geom_line() +
   ylim(0, 1) +
