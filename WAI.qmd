@@ -174,6 +174,8 @@ absorbance_sex |>
       legend.spacing.y = unit(0.1, "cm"),
       legend.background = element_rect(fill = "white", size = 0.5)
       )
+
+dbDisconnect(con_wai, shutdown = TRUE)
 ```
 
 This tells us about as much as the single-study graph— not much difference. One note, some studies only use one sex, for example Abur 2014 only tested females. From this, while some differences can be seen visually, there's nothing so obvious to make me assume sex impacts absorbance.
