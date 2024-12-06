@@ -32,7 +32,6 @@ drunkPassenger <- function(n, seats){
   drunkPassenger(n + 1, remaining_seats)
 }
 
-
 seats <- 2:100
 runs <- 1000
 
@@ -46,7 +45,6 @@ drunk_passengers_100 <- map(seats, function(x) {
   mutate(runs = runs, num_seats = num_passengers) |>
   select(num_passengers, num_seats, pct_correct_last_seat, runs)
 
-
 drunk_passengers_100 |>
   ggplot(aes(x = num_passengers, y = pct_correct_last_seat)) +
     geom_line() +
@@ -56,7 +54,6 @@ drunk_passengers_100 |>
       x = "Number of Passengers",
       y = ""
     )
-
 ```
 
 So we see on a fully booked flight, there's a 50% chance the last guy gets his seat, no matter how many passengers!

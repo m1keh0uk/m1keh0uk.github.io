@@ -1,7 +1,7 @@
 ---
-title: "title of presentation"
-author: "your name"
-subtitle: "date of presentation"
+title: "DS002 EOY Presentation Demonstration"
+author: "Michael Houk"
+subtitle: "Dec. 9, 2024"
 format:
   revealjs:
     scrollable: true
@@ -13,16 +13,220 @@ execute:
   warning: false
   message: false
 ---
-
-Yo
-
-##
-
-was good
-<iframe src="https://www.wikipedia.org" width="100%" height="600" style="border: none;"></iframe>
+```{r, include=FALSE}
+library(tidyverse)
+library(purrr)
+```
 
 
+## Projects
+1. World's Fair
+2. Outer Space Objects
+3. Obama's Tweets
+4. Drunk Passenger Simulation
+5. WAI Measures
+
+## Drunk Passenger Problem
+<img src="/Users/michaelhouk/Documents/git/m1keh0uk.github.io/media/drunkPass.jpeg" alt="Description of image" width="600" style="margin: auto; display: block;">
+
+The first guy to board a fully booked plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is available, they will sit there, if it has been taken, they choose randomly. 
+
+## The Big Question
+
+Whats the probability the last person to board gets their seat?
+
+## Simulation
+
+```{r, warning=FALSE, message=FALSE, error=FALSE, eval=FALSE}
+drunkPassenger <- function(n, seats){
+  #generate random seat for first (drunk) passenger
+  if (n == 1) {
+    seats <-seats[seats != sample(seats, 1, replace = FALSE)]
+  }
+  
+  #check if last seat matches last person, return true/false
+  if (length(seats) == 1){
+    return(seats[1] == n)
+  }
+  
+  #pick assigned seat if available, else pick random
+  choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+  remaining_seats <- seats[seats != choice]
+  
+  #call function again for next passenger
+  drunkPassenger(n + 1, remaining_seats)
+}
+
+seats <- 2:100
+runs <- 1000
+```
+
+## Vizualization
+
+```{r, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+drunkPassenger <- function(n, seats){
+  #generate random seat for first (drunk) passenger
+  if (n == 1) {
+    seats <-seats[seats != sample(seats, 1, replace = FALSE)]
+  }
+  
+  #check if last seat matches last person, return true/false
+  if (length(seats) == 1){
+    return(seats[1] == n)
+  }
+  
+  #pick assigned seat if available, else pick random
+  choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+  remaining_seats <- seats[seats != choice]
+  
+  #call function again for next passenger
+  drunkPassenger(n + 1, remaining_seats)
+}
+
+seats <- 2:100
+runs <- 100
+
+drunk_passengers_100 <- map(seats, function(x) {
+  data.frame(
+    num_passengers = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger(1, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_seats = num_passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+drunk_passengers_100 |>
+  ggplot(aes(x = num_passengers, y = pct_correct_last_seat)) +
+    geom_line() +
+    ylim(0,1)+
+    labs(
+      title = "Odds Last Person Gets Their Seat",
+      x = "Number of Passengers",
+      y = ""
+    )
+```
+
+## Lets make it harder
+
+Now imagine the plane isn't fully booked and that there's extra seats. Now whats the proability the last person gets their assinged seat given n passengers and k seats. (k > n)
+
+
+## Simulation 2
+
+```{r, eval=FALSE}
+drunkPassenger_k <- function(n, passengers, seats){
+  #check if last guy gets his seat
+  if (length(passengers) == n){
+    return(n %in% seats)
+  }
+  
+  #fist seat selection
+  if (n == 1) {
+    first_choice = sample(seats, 1, replace = FALSE)
+    #stop simulation if chooses last persons seat
+    if (first_choice == length(passengers)) {
+      return(FALSE)
+    }
+    remaining_seats <-seats[seats != first_choice]
+  
+  } else{
+      #pick assigned seat if available, else pick random
+      choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+      if (choice == length(passengers)) {
+        return(FALSE)
+      }
+      remaining_seats <-seats[seats != choice]
+  }
+  
+  #call function again for next passenger
+  drunkPassenger_k(n + 1, passengers, remaining_seats)
+}
+
+runs = 1000
+passengers = 20
+seats = 20:30
+```
+
+
+## Vizualization 2
+```{r, echo=FALSE}
+drunkPassenger_k <- function(n, passengers, seats){
+  #check if last guy gets his seat
+  if (length(passengers) == n){
+    return(n %in% seats)
+  }
+  
+  #fist seat selection
+  if (n == 1) {
+    first_choice = sample(seats, 1, replace = FALSE)
+    #stop simulation if chooses last persons seat
+    if (first_choice == length(passengers)) {
+      return(FALSE)
+    }
+    remaining_seats <-seats[seats != first_choice]
+  
+  } else{
+      #pick assigned seat if available, else pick random
+      choice = ifelse(n %in% seats, n, sample(seats, 1, replace = FALSE))
+      if (choice == length(passengers)) {
+        return(FALSE)
+      }
+      remaining_seats <-seats[seats != choice]
+  }
+  
+  #call function again for next passenger
+  drunkPassenger_k(n + 1, passengers, remaining_seats)
+}
+
+runs = 1000
+passengers = 20
+seats = 20:30
+
+
+drunk_passengers_k20 <- map(seats, function(x) {
+  data.frame(
+    num_seats = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger_k(1, 1:passengers, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_passengers = passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+
+runs = 1000
+passengers = 5
+seats = 5:15
+
+drunk_passengers_k5 <- map(seats, function(x) {
+  data.frame(
+    num_seats = x,
+    pct_correct_last_seat = mean(map_lgl(1:runs, ~ drunkPassenger_k(1, 1:passengers, 1:x)))
+  )
+}) |>
+  list_rbind() |>
+  mutate(runs = runs, num_passengers = passengers) |>
+  select(num_passengers, num_seats, pct_correct_last_seat, runs)
+
+
+  
+drunk_k <- bind_rows(drunk_passengers_k5, drunk_passengers_k20)
+  
+drunk_k |>
+  group_by(num_passengers) |>
+  mutate(diff = num_seats - num_passengers) |>
+  ggplot(aes(x = diff, y = pct_correct_last_seat, color = factor(num_passengers), group = num_passengers)) +
+    geom_line() +
+    labs(
+      color = "Number of Passengers",
+      x = "Extra Seats",
+      title = "Odds Last Person Gets Their Seat",
+      y = "")
+```
 
 
 
+## The End
 
+Thanks for listening, have a good break!
