@@ -101,7 +101,7 @@ drunk_passengers_100 |>
     geom_line() +
     ylim(0,1)+
     labs(
-      title = "Odds Last Person Gets Their Seat",
+      title = "% of Planes Where Last Person Gets Their Seat",
       x = "Number of Passengers",
       y = ""
     )
@@ -221,7 +221,7 @@ drunk_k |>
     labs(
       color = "Number of Passengers",
       x = "Extra Seats",
-      title = "Odds Last Person Gets Their Seat",
+      title = "% of Planes Where Last Person Gets Their Seat",
       y = "")
 ```
 

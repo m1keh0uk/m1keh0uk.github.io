@@ -50,13 +50,11 @@ drunk_passengers_100 |>
     geom_line() +
     ylim(0,1)+
     labs(
-      title = "Odds Last Person Gets Their Seat",
+      title = "% of Planes Where Last Person Gets Their Seat",
       x = "Number of Passengers",
       y = ""
     )
 ```
-
-
 
 So we see on a fully booked flight, there's a 50% chance the last guy gets his seat, no matter how many passengers!
 
@@ -65,8 +63,6 @@ So we see on a fully booked flight, there's a 50% chance the last guy gets his s
 Now let's consider that the plane isn't fully booked, that there are n passengers but k seats, given that k \>= n.
 
 Let's take n to be 20, and simulate k from 20:30
-
-
 
 ```{r}
 drunkPassenger_k <- function(n, passengers, seats){
@@ -146,9 +142,8 @@ drunk_k |>
     labs(
       color = "Number of Passengers",
       x = "Extra Seats",
-      title = "Odds Last Person Gets Their Seat",
+      title = "% of Planes Where Last Person Gets Their Seat",
       y = "")
 ```
-
 
 If n is fixed, increasing k makes the probability of the last guy finding his seat approach 1. Pretty intuitive. It's cool to see that the number of passengers and seats doesn't affect the odds, it's the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there's 3 extra seats in both examples. This shows a unique solution that isn't very intuitive.
