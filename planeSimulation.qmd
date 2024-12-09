@@ -2,7 +2,7 @@
 title: "Drunk Passenger"
 ---
 
-There are n passengers getting on a fully booked plane. The first guy to board the plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is avaible, they will sit there, if it has been taken, they do as the first guy and choose randomly. Whats the probability that the last guy to board sits in his assigned seat?
+There are n passengers getting on a fully booked plane. The first guy to board the plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is available, they will sit there, if it has been taken, they do as the first guy and choose randomly. What's the probability that the last guy to board sits in his assigned seat?
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -56,13 +56,17 @@ drunk_passengers_100 |>
     )
 ```
 
+
+
 So we see on a fully booked flight, there's a 50% chance the last guy gets his seat, no matter how many passengers!
 
 [Part 2: Extra Seats]{style="font-size:1.25em; color:gray;"}
 
-Now lets consider that the plane isn't fully booked, that there's n passengers but k seats, given that k \>= n.
+Now let's consider that the plane isn't fully booked, that there are n passengers but k seats, given that k \>= n.
 
-Lets take n to be 20, and simulate k from 20:30
+Let's take n to be 20, and simulate k from 20:30
+
+
 
 ```{r}
 drunkPassenger_k <- function(n, passengers, seats){
@@ -146,4 +150,5 @@ drunk_k |>
       y = "")
 ```
 
-If n is fixed, increasing k makes the probability of last guy finding his seat approaches 1. Pretty intuitive. It's cool to see that the number of passengers and seats doesn't affect the odds, its the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there's 3 extra seats in both examples. This shows a unique solution that isn't very intuitive.
+
+If n is fixed, increasing k makes the probability of the last guy finding his seat approach 1. Pretty intuitive. It's cool to see that the number of passengers and seats doesn't affect the odds, it's the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there's 3 extra seats in both examples. This shows a unique solution that isn't very intuitive.

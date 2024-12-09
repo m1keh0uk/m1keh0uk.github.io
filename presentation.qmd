@@ -109,7 +109,7 @@ drunk_passengers_100 |>
 
 ## Lets make it harder
 
-Now imagine the plane isn't fully booked and that there's extra seats. Now whats the proability the last person gets their assinged seat given n passengers and k seats. (k > n)
+Now imagine the plane isn't fully booked and that there are extra seats. Now what's the probability the last person gets their assigned seat given n passengers and k seats? (k > n)
 
 
 ## Simulation 2
