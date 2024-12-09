@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This is a great way to see what Obama’s presidency was about. His most his most notable policy reforms are on this list. Over 600 tweets about #ActOnClimate—he really cared!</p>
+<p>This is a great way to see what Obama’s presidency was about. His most notable policy reforms are on this list. Over 600 tweets about #ActOnClimate—he really cared!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"tweets.csv"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wordCount =</span> <span class="fu">str_count</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">S+"</span>)) <span class="sc">|&gt;</span></span>

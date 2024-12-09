@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>There are n passengers getting on a fully booked plane. The first guy to board the plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is avaible, they will sit there, if it has been taken, they do as the first guy and choose randomly. Whats the probability that the last guy to board sits in his assigned seat?</p>
+<p>There are n passengers getting on a fully booked plane. The first guy to board the plane got taken away at the terminal bar earlier and ended up losing his ticket. He walks on and randomly chooses a seat to sit in. Everyone else begins to board, one by one, if their assigned seat is available, they will sit there, if it has been taken, they do as the first guy and choose randomly. What’s the probability that the last guy to board sits in his assigned seat?</p>
 <p>Let’s simulate for planes ranging from 2 to 100 passengers.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>drunkPassenger <span class="ot">&lt;-</span> <span class="cf">function</span>(n, seats){</span>
@@ -255,8 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>So we see on a fully booked flight, there’s a 50% chance the last guy gets his seat, no matter how many passengers!</p>
 <p><span style="font-size:1.25em; color:gray;">Part 2: Extra Seats</span></p>
-<p>Now lets consider that the plane isn’t fully booked, that there’s n passengers but k seats, given that k &gt;= n.</p>
-<p>Lets take n to be 20, and simulate k from 20:30</p>
+<p>Now let’s consider that the plane isn’t fully booked, that there are n passengers but k seats, given that k &gt;= n.</p>
+<p>Let’s take n to be 20, and simulate k from 20:30</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>drunkPassenger_k <span class="ot">&lt;-</span> <span class="cf">function</span>(n, passengers, seats){</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#check if last guy gets his seat</span></span>
@@ -339,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If n is fixed, increasing k makes the probability of last guy finding his seat approaches 1. Pretty intuitive. It’s cool to see that the number of passengers and seats doesn’t affect the odds, its the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there’s 3 extra seats in both examples. This shows a unique solution that isn’t very intuitive.</p>
+<p>If n is fixed, increasing k makes the probability of the last guy finding his seat approach 1. Pretty intuitive. It’s cool to see that the number of passengers and seats doesn’t affect the odds, it’s the difference between them. n=5, k=8 is the same odds as n=20, k=23, since there’s 3 extra seats in both examples. This shows a unique solution that isn’t very intuitive.</p>
 
 
 

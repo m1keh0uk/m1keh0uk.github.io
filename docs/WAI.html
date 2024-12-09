@@ -177,7 +177,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-2" id="toc-part-2" class="nav-link active" data-scroll-target="#part-2">!!!!!!! PART 2 !!!!!!!!</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>For this project, I’ll make some graphs of Wideband acoustic immittance (WAI) measures, specifically absorbance. The first part will be creating a graph to match the work from Voss (2020). It will plot Frequency vs.&nbsp;Absorbance across 12 studies.</p>
-<p>This project calls for SQL joining. Because of the multiple studies, different frequencies, issues of some ears tested more than once, their will be a lot of jostling around of the data. After that, I can use the info tables to get the required information about the authors and year of the studies. Then some ggplot magic!</p>
+<p>This project calls for SQL joining. Because of the multiple studies, different frequencies, and issues of some ears tested more than once, there will be a lot of jostling around of the data. After that, I can use the info tables to get the required information about the authors and year of the studies. Then some ggplot magic!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>absorbance3 <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(con_wai,<span class="st">"SELECT</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">  info.Identifier,</span></span>
@@ -259,9 +265,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>After re-interpreting the caption of the original table, I questioned my approach to the averaging of absorbance. My take was that if the same subject, during the same study, had their ear measured at the same frequency more than once, then that would be treated as a single observation. The average would then be computed for the entire study. This takes away unfair weighting of a subjects absorbance level. I accomplished that by grouping by study, patient, ear, frequency, and taking absorbance as the average, to remove any duplicate ear measures. I nested this table inside another select, which was joined with the PI_info, to get the short version of author list, and PI_info_old, to filter only the studies used in the graph. Then I removed measurements that used frequencies outside the range, and did a “CASE WHEN” to turn the “other” instruments into “not commercial system.” For ggplot, I did a log transform on the x-axis, seems to match up very well with the graph in the publication. Then did some delicate movement of the legend to put it in the top left corner. Just by the eye test, most of the lines match up, some… not so much. Unsure what tweaks were made, but overall, it looks solid.</p>
-<p>##!!!!!!! PART 2 !!!!!!!!</p>
-<p>Lets see if there’s any difference between sex’s. Similar approach to last time, but we’ll just look at one study. Since everyone uses different frequency levels, combining all studies doesn’t and grouping by frequencies doesnt create nice averages. If all studies used the same frequencies, then grouping and averaging would work out better. If I do male vs.&nbsp;female individualy for every study, but I fear that will over populate the screen. But lets do both, male vs.&nbsp;female for one study, then for each study sepratley.</p>
+<p>After re-interpreting the caption of the original table, I questioned my approach to the averaging of absorbance. My take was that if the same subject, during the same study, had their ear measured at the same frequency more than once, then that would be treated as a single observation. The average would then be computed for the entire study. This takes away unfair weighting of a subject’s absorbance level. I accomplished that by grouping by study, patient, ear, and frequency, and taking absorbance as the average, to remove any duplicate ear measures. I nested this table inside another select, which was joined with the PI_info, to get the short version of the author list, and PI_info_old, to filter only the studies used in the graph. Then I removed measurements that used frequencies outside the range, and did a “CASE WHEN” to turn the “other” instruments into “not commercial system.” For ggplot, I did a log transform on the x-axis, which seems to match up very well with the graph in the publication. Then did some delicate movements of the legend to put it in the top left corner. Just by the eye test, most of the lines match up, some… not so much. Unsure what tweaks were made, but overall, it looks solid.</p>
+<section id="part-2" class="level2">
+<h2 class="anchored" data-anchor-id="part-2">!!!!!!! PART 2 !!!!!!!!</h2>
+<p>Let’s see if there’s any difference between the sexes. Similar approach to last time, but we’ll just look at one study. Since everyone uses different frequency levels, combining all studies doesn’t and grouping by frequencies does not create nice averages. If all studies used the same frequencies, then grouping and averaging would work out better. If I do male vs.&nbsp;female individually for every study, I fear that will overpopulate the screen. But let’s do both, male vs.&nbsp;female for one study, then for each study separately.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>absorbance_sex1 <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(con_wai,<span class="st">"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
@@ -311,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This shows that there isn’t much gender difference. The line are fairly consistent with each other. This only shows one study however. It could be helpful to view them all.</p>
+<p>This shows that there isn’t much gender difference. The lines are fairly consistent with each other. This only shows one study, however. It could be helpful to view them all.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>absorbance_sex <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(con_wai,<span class="st">"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
@@ -361,10 +368,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con_wai, <span class="at">shutdown =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This tells us about as much as the single-study graph— not much difference. One note, some studies only use one sex, for example Abur 2014 only tested females. From this, while some differences can be seen visually, there’s nothing so obvious to make me assume sex impacts absorbance.</p>
-<p>To access the data used here, visit this website: http://www.science.smith.edu/wai-database/. The first graph was meant to mimic the work of Susan E Voss, her much better looking graph can be seen at this website: https://pmc.ncbi.nlm.nih.gov/articles/PMC7093226/</p>
+<p>This tells us about as much as the single-study graph— not much difference. One note, some studies only use one sex, for example, Abur 2014 only tested females. From this, while some differences can be seen visually, there’s nothing so obvious to make me assume sex impacts absorbance.</p>
+<p>To access the data used here, visit this website: http://www.science.smith.edu/wai-database/. The first graph was meant to mimic the work of Susan E Voss, her much better-looking graph can be seen at this website: https://pmc.ncbi.nlm.nih.gov/articles/PMC7093226/</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
