@@ -17,6 +17,6 @@ about:
 
 <!-- Website for help:https://ucsb-meds.github.io/creating-quarto-websites/ -->
 
-This is the website of Michael Houk. Here is a list of some of my key identities and qualities, though it is by no means exhaustive: Brother, Student, Friend, Athlete, Awake, Myself?, Thinker, Attached.
+This is the website of Michael Houk. 
 
-I study economics and engineering. I play football. I like hard work.
+I study economics and engineering. I play football.
