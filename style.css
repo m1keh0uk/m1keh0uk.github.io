@@ -1,0 +1,85 @@
+a {
+    color: blue;
+}
+.nav {
+    background-color: #ff5607;
+    text-align: center;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav li {
+    margin: 0 10px;
+}
+
+.nav a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none; 
+}
+
+.nav a:hover {
+    background-color: #555;
+}
+
+table {
+    width: 60%;
+    margin: 40px;
+    border-collapse: collapse; 
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #979595;
+    font-weight: bold;
+}
+
+.bucket-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+}
+
+.bucket-item h2 {
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+#skydiving {
+    color: red;
+}
+
+.bottom-image img {
+    width: 100%;
+    height: auto;
+}
+
+.about-me {
+    padding: 20px;
+    background-color: yellow;
+}
+
+.links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+        padding: 10px;
+        text-align: center;
+    }
+}
